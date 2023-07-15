@@ -18,7 +18,7 @@ jobs:
         uses: AnimMouse/setup-yt-dlp@v1
         
       - name: Download
-        run: yt-dlp -o 'video.mp4' -f best '${{ secrets.URL }}'
+        run: yt-dlp -f best '${{ secrets.URL }}'
 
       - name: GH Release
         uses: softprops/action-gh-release@v0.1.5
@@ -26,4 +26,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            video.mp4
+            *.mp4
