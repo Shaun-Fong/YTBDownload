@@ -2,6 +2,7 @@ name: Download
 
 on:
   push:
+    tags: v*
 
 jobs:
   build:
@@ -19,7 +20,10 @@ jobs:
       - name: Download
         run: yt-dlp -o 'video.mp4' -f best '${{ secrets.URL }}'
 
-      - uses: actions/upload-artifact@v3
+      - name: GH Release
+        uses: softprops/action-gh-release@v0.1.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: VIDEO
-          path: video.mp4
+          files: |
+            video.mp4
