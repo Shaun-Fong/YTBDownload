@@ -13,17 +13,16 @@ jobs:
         with:
           submodules: recursive
           
-      - name: Setup youtube-dl
-        uses: AnimMouse/setup-youtube-dl@v1
+      - name: Setup yt-dlp
+        uses: AnimMouse/setup-yt-dlp@v1
         
       - name: Download
-        run: youtube-dl -o 'video.mp4' -f best 'https://www.youtube.com/watch?v=t5rYXC-4R-Q'
+        run: yt-dlp -o 'video.mp4' -f best 'https://www.youtube.com/watch?v=t5rYXC-4R-Q'
 
       - name: GH Release
         uses: softprops/action-gh-release@v0.1.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          prerelease: true
           files: |
             video.mp4
